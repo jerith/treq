@@ -29,6 +29,14 @@ _cookie_jars = WeakKeyDictionary()
 
 
 def cookies(response):
+    """
+    Returns a dictionary-like CookieJar based on the cookies from the
+    response.
+
+    :param IResponse response:
+
+    :rtype: CookieJar
+    """
     jar = cookiejar_from_dict({})
 
     resp_jar = _cookie_jars.get(response, None)
@@ -82,7 +90,7 @@ class HTTPClient(object):
         pool = kwargs.get('pool')
         if not pool:
             persistent = kwargs.get('persistent', True)
-            pool = HTTPConnectionPool(reactor, persitent=persistent)
+            pool = HTTPConnectionPool(reactor, persistent=persistent)
 
         agent = Agent(reactor, pool=pool)
 
